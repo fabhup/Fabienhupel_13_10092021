@@ -1,13 +1,11 @@
-import '../styles/Home.css'
 import HeroBanner from '../components/HeroBanner'
+import Features from '../components/Features'
 import banktreeImage from '../assets/bank-tree.jpeg'
 import moneyIcon from '../assets/icon-money.png'
 import chatIcon from '../assets/icon-chat.png'
 import securityIcon from '../assets/icon-security.png'
 
-import Features from '../components/Features'
-
-function Home() {
+export default function HomePage() {
     const heroTitle = 'Promoted Content'
     const heroSubtitlesList = [
         'No fees.',
@@ -53,5 +51,3 @@ function Home() {
         </main>
     )
 }
-
-export default Home

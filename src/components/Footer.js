@@ -1,5 +1,3 @@
-import MainNav from './MainNav'
-
 function Footer() {
     return (
         <footer className="footer">

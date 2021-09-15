@@ -8,11 +8,11 @@ const HeroBannerContainer = styled.div`
     background-position: 0 -50px;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 300px;
+    height: max(300px, 20rem);
     position: relative;
 
     ${mediaQuery.min.desktop`
-        height: 400px;
+        height: max(400px, 25rem);
         background-position: 0% 33%;
     `}
 `

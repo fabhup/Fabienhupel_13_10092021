@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Home from './pages/Home'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+
 import reportWebVitals from './reportWebVitals'
 import './styles/index.css'
 import Header from './components/Header'
@@ -16,7 +18,10 @@ ReactDOM.render(
             <Header />
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <HomePage />
+                </Route>
+                <Route path="/sign-in">
+                    <LoginPage />
                 </Route>
             </Switch>
             <Footer />

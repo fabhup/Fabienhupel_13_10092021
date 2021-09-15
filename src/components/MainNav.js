@@ -25,7 +25,7 @@ const NavContainer = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px;
+    padding: 5px min(20px, 2vw);
 
     & .main-nav-item {
         margin-right: 0.5rem;

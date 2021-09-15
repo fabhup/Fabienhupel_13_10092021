@@ -6,12 +6,6 @@ const StyledGlobalStyle = createGlobalStyle`
         font-family: 'Avenir';
         src: url(${AvenirHeavy}) format('ttf'),
     }
-
-    *, *:before, *:after {
-        padding: 0;
-        margin: 0;
-        box-sizing: inherit;
-    }
     
     html {
         font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -55,6 +49,13 @@ const StyledGlobalStyle = createGlobalStyle`
         font-size: 1.17em;
         margin: 1em 0;
         font-weight: bold;
+    }
+
+    #root {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 `
 
