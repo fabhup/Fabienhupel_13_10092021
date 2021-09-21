@@ -1,6 +1,7 @@
 import { rest } from 'msw'
-import { users, token } from './mockedData'
+import { users } from './mockedData'
 import { apiUrl } from '../utils/config/config'
+import jwt from 'jsonwebtoken'
 
 // handlers for mocking api calls (for tests and development without backend)
 export const handlers = [
@@ -19,12 +20,17 @@ export const handlers = [
             ctxStatus = 400
             ctxJSON = { message: 'Error: User not found!' }
         } else {
-            const isValidPassword = user.password === password
+            const isValidPassword = password === user.password
             if (!isValidPassword) {
                 ctxStatus = 400
                 ctxJSON = { message: 'Error: Password is invalid' }
             } else {
                 ctxStatus = 200
+                const token = jwt.sign(
+                    { id: user._id },
+                    process.env.REACT_APP_SECRET_KEY || 'default-secret-key',
+                    { expiresIn: '1d' }
+                )
                 ctxJSON = { body: { token: token } }
             }
         }

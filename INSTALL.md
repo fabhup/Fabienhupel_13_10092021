@@ -36,4 +36,8 @@ npm install axios
 # Install mock server worker (msw) for mocking API responses and msw directory in public repository
 npm install msw
 npx msw init public
+
+# Install jsonwebtoken to backend mocked
+npm install jsonwebtoken
+
 ```
