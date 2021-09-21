@@ -4,6 +4,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectAuthentication } from '../utils/selectors'
+import { logout } from '../features/authentication'
 
 const HomeLogo = styled.img`
     max-width: 100%;
@@ -41,6 +45,9 @@ const NavContainer = styled.nav`
 `
 
 function MainNav() {
+    const authentication = useSelector(selectAuthentication)
+    const dispatch = useDispatch()
+
     return (
         <NavContainer>
             <Link to="/" className="main-nav-logo">
@@ -49,8 +56,14 @@ function MainNav() {
             <div>
                 <StyledLink to="/sign-in">
                     <Icon icon={faUserCircle} size="lg" />
-                    Sign In
+                    {authentication.status === 'success' ? '' : 'Sign In'}
                 </StyledLink>
+                {authentication.status === 'success' && (
+                    <StyledLink to="/" onClick={() => dispatch(logout())}>
+                        <Icon icon={faSignOutAlt} size="lg" />
+                        Sign Out
+                    </StyledLink>
+                )}
             </div>
         </NavContainer>
     )
