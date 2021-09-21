@@ -32,6 +32,8 @@ export function login(username, password) {
             )
             const data = response.data
             dispatch(actions.loginSuccess({ username: username, data: data }))
+            await new Promise((r) => setTimeout(r, 500))
+            dispatch(actions.logout())
         } catch (error) {
             try {
                 const errorMessage = error.response.data.message
@@ -89,6 +91,7 @@ const { actions, reducer } = createSlice({
             }
             return
         },
+        logout: () => initialState,
     },
 })
 
