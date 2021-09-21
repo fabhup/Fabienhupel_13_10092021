@@ -40,4 +40,45 @@ export const handlers = [
             ctx.json(ctxJSON)
         )
     }),
+
+    rest.post(apiUrl + '/user/profile', validateToken, getUserProfile),
 ]
+
+function getUserProfile(req, res, ctx) {
+    const ctxDelay = 500
+    let ctxStatus = null
+    let ctxJSON = null
+
+    const jwtToken = req.headers.authorization.split('Bearer')[1].trim()
+    const decodedJwtToken = jwt.decode(jwtToken)
+    const user = users.find({ _id: decodedJwtToken.id })
+
+    if (!user) {
+        ctxStatus = 400
+        ctxJSON = { message: 'User not found' }
+    } else {
+        ctxStatus = 200
+        ctxJSON = user.toObject()
+    }
+    return res(ctx.delay(ctxDelay), ctx.status(ctxStatus), ctx.json(ctxJSON))
+}
+
+function validateToken(req, res, ctx, next) {
+    const ctxDelay = 500
+    let ctxStatus = null
+    let ctxJSON = null
+    try {
+        const userToken = req.headers.authorization.split('Bearer')[1].trim()
+        const decodedToken = jwt.verify(
+            userToken,
+            process.env.REACT_APP_SECRET_KEY || 'default-secret-key'
+        )
+        return next()
+    } catch (error) {
+        if (!req.headers.authorization) {
+            ctxStatus = 400
+            ctxJSON = { message: 'Token is missing from header' }
+        }
+    }
+    return res(ctx.delay(ctxDelay), ctx.status(ctxStatus), ctx.json(ctxJSON))
+}

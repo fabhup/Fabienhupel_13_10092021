@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Input from './Input'
-import Button from './Button'
+import Button from '../components/Button'
 import { login } from '../features/authentication'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,8 +9,15 @@ import { useHistory } from 'react-router-dom'
 
 const LoginFormContainer = styled.form``
 
+const SignInButton = styled(Button)`
+    width: 100%;
+    height: 2.5rem;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+`
 export default function LoginForm() {
-    
     // local states for LoginForm component
     const [inputs, setInputs] = useState({
         username: '',
@@ -20,7 +27,7 @@ export default function LoginForm() {
     const [submitted, setSubmitted] = useState(false)
     const { username, password, remember } = inputs
 
-    // hook for redirect route 
+    // hook for redirect route
     let history = useHistory()
 
     // get Redux state for authentication
@@ -28,9 +35,9 @@ export default function LoginForm() {
     const authentication = useSelector(selectAuthentication)
 
     useEffect(() => {
-        // if user is logged redirection to userPage
+        // if user is logged redirection to profilePage
         if (authentication.status === 'success') {
-            history.push('/user')
+            history.push('/profile')
         }
     }, [authentication.status])
 
@@ -48,8 +55,8 @@ export default function LoginForm() {
         setInputs((inputs) => ({ ...inputs, [name]: checked }))
     }
 
-    // function on submit form : redux state authentication is updated 
-    // and route is redirected to UserPage if success
+    // function on submit form : redux state authentication is updated
+    // and route is redirected to ProfilePage if success
     async function handleSubmit(e) {
         e.preventDefault()
         setSubmitted(true)
@@ -57,11 +64,11 @@ export default function LoginForm() {
             dispatch(login(username, password))
         }
         if (authentication.status === 'success') {
-            history.push('/user')
+            history.push('/profile')
         }
     }
 
-    // constants to manage Invalid Inputs 
+    // constants to manage Invalid Inputs
     const isPasswordNotSpecified = submitted && !password
     const isPasswordInvalid =
         submitted && authentication.error === 'Error: Password is invalid'
@@ -111,7 +118,7 @@ export default function LoginForm() {
                 inputValue={remember}
                 inputEvents={{ onChange: handleChangeCheckbox }}
             ></Input>
-            <Button
+            <SignInButton
                 style={{ position: 'relative' }}
                 buttonType="submit"
                 buttonText="Sign In"

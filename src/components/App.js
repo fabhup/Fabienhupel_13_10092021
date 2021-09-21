@@ -9,7 +9,7 @@ import { selectAuthentication } from '../utils/selectors'
 import GlobalStyle from '../utils/style/GlobalStyle'
 import HomePage from '../pages/HomePage'
 import LoginPage from '../pages/LoginPage'
-import UserPage from '../pages/UserPage'
+import ProfilePage from '../pages/ProfilePage'
 import Header from './Header'
 import Footer from './Footer'
 
@@ -24,19 +24,19 @@ export default function App() {
                     {authentication.status !== 'success' ? (
                         <HomePage />
                     ) : (
-                        <Redirect from="/" to="/user" />
+                        <Redirect from="/" to="/profile" />
                     )}
                 </Route>
                 <Route exact path="/sign-in">
                     {authentication.status !== 'success' ? (
                         <LoginPage />
                     ) : (
-                        <Redirect from="/sign-in" to="/user" />
+                        <Redirect from="/sign-in" to="/profile" />
                     )}
                 </Route>
                 {authentication.status === 'success' && (
-                    <Route exact path="/user">
-                        <UserPage />
+                    <Route exact path="/profile">
+                        <ProfilePage />
                     </Route>
                 )}
                 <Redirect from="*" to="/" />

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAuthentication } from '../utils/selectors'
+import { selectAuthentication, selectProfile } from '../utils/selectors'
 import { logout } from '../features/authentication'
 
 const HomeLogo = styled.img`
@@ -19,6 +19,9 @@ const StyledLink = styled(Link)`
     font-weight: bold;
     color: #2c3e50;
     margin-right: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 `
 
 const Icon = styled(FontAwesomeIcon)`
@@ -43,9 +46,13 @@ const NavContainer = styled.nav`
         align-items: center;
     }
 `
+const LinkContainer = styled.div`
+    display: flex;
+`
 
 function MainNav() {
     const authentication = useSelector(selectAuthentication)
+    const profile = useSelector(selectProfile)
     const dispatch = useDispatch()
 
     return (
@@ -53,10 +60,12 @@ function MainNav() {
             <Link to="/" className="main-nav-logo">
                 <HomeLogo src={logo} alt="Argent Bank Logo" />
             </Link>
-            <div>
+            <LinkContainer>
                 <StyledLink to="/sign-in">
                     <Icon icon={faUserCircle} size="lg" />
-                    {authentication.status === 'success' ? '' : 'Sign In'}
+                    {authentication.status === 'success'
+                        ? profile.user.firstName
+                        : 'Sign In'}
                 </StyledLink>
                 {authentication.status === 'success' && (
                     <StyledLink to="/" onClick={() => dispatch(logout())}>
@@ -64,7 +73,7 @@ function MainNav() {
                         Sign Out
                     </StyledLink>
                 )}
-            </div>
+            </LinkContainer>
         </NavContainer>
     )
 }

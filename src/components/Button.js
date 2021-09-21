@@ -8,12 +8,6 @@ const StyledButton = styled.button`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
-    height: 2.5rem;
-    padding: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 1rem;
     border-color: ${colors.primaryLight};
     border: none;
     background-color: ${colors.primaryLight};
@@ -37,9 +31,11 @@ export default function Button({
     buttonText,
     buttonBackgroundImage,
     isLoading,
+    className,
 }) {
     return (
         <StyledButton
+            className={className}
             type={buttonType}
             buttonBackgroundImage={buttonBackgroundImage}
         >

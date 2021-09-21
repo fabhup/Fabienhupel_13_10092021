@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import AvenirHeavy from "../fonts/Avenir-Heavy/Avenir-Heavy.ttf";
+import colors from './color'
 
 // GlobalStyle component to manage the style used for all the App
 
@@ -20,7 +21,7 @@ const StyledGlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
+        color: ${colors.secondary};
     }
     
     body {
@@ -50,6 +51,16 @@ const StyledGlobalStyle = createGlobalStyle`
 
     main {
         flex: 1;
+    }
+
+    h1 {
+        display: block;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
     }
 
     h3 {
