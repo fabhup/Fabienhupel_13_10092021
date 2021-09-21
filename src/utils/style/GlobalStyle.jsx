@@ -1,10 +1,18 @@
 import { createGlobalStyle } from 'styled-components'
 import AvenirHeavy from "../fonts/Avenir-Heavy/Avenir-Heavy.ttf";
 
+// GlobalStyle component to manage the style used for all the App
+
 const StyledGlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'Avenir';
         src: url(${AvenirHeavy}) format('ttf'),
+    }
+
+    *, *:before, *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
     }
     
     html {

@@ -1,5 +1,7 @@
 import { css } from 'styled-components'
 
+// MediaQuery rules for apply different style on styled components for responsive design
+
 let mediaQuery = {
     breakpoints: {
         mobile: { value: 450 },

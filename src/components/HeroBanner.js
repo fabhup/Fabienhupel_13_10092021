@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import mediaQuery from '../utils/style/mediaQuery'
 import colors from '../utils/style/color'
+import PropTypes from 'prop-types'
 
 const HeroBannerContainer = styled.div`
     background-image: url(${(props) => props.backgroundImage});
@@ -83,4 +84,14 @@ export default function HeroBanner({
             </HeroContent>
         </HeroBannerContainer>
     )
+}
+
+HeroBanner.propTypes = {
+    heroTitle: PropTypes.shape({
+        title: PropTypes.string,
+        display: PropTypes.bool,
+    }),
+    heroBackgroundImage: PropTypes.string,
+    heroSubtitlesList: PropTypes.arrayOf(PropTypes.string),
+    heroTextContent: PropTypes.string,
 }

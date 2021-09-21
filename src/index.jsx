@@ -1,32 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-
 import reportWebVitals from './reportWebVitals'
-import './styles/index.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import GlobalStyle from './utils/style/GlobalStyle'
+import App from './components/App'
+import {worker} from './_mocks/browser'
+import { Provider } from 'react-redux'
+import store from './utils/store'
 
+// This script is used to active mock on dev env (if env param REACT_APP_API_MOCKING is enabled) 
+if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_MOCKING === 'enabled') {
+    const { worker } = require('./_mocks/browser')
+    worker.start()
+}
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-            <GlobalStyle />
-            <Header />
-            <Switch>
-                <Route exact path="/">
-                    <HomePage />
-                </Route>
-                <Route path="/sign-in">
-                    <LoginPage />
-                </Route>
-            </Switch>
-            <Footer />
-        </Router>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </Provider>, 
     document.getElementById('root')
 )
 

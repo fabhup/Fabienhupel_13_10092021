@@ -1,8 +1,18 @@
+import styled from 'styled-components'
+import colors from '../utils/style/color'
+
+const FooterContainer = styled.footer`
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid ${colors.backgroundLight};
+    padding: 2vh 0 1.5vh;
+`
+
 function Footer() {
     return (
-        <footer className="footer">
-            <p className="footer-text">Copyright 2020 Argent Bank</p>
-        </footer>
+        <FooterContainer>
+            <p>{`Copyright ${new Date().getFullYear()} Argent Bank`}</p>
+        </FooterContainer>
     )
 }
 
