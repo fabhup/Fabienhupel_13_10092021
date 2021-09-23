@@ -4,7 +4,7 @@ import colors from '../utils/style/color'
 import PropTypes from 'prop-types'
 import LoadSpinner from '../components/LoadSpinner'
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -14,6 +14,7 @@ const StyledButton = styled.button`
     color: white;
     cursor: pointer;
     text-decoration: underline;
+    border-radius: 3px;
     ${(props) => {
         if (props.buttonBackgroundImage) {
             return `
@@ -32,12 +33,14 @@ export default function Button({
     buttonBackgroundImage,
     isLoading,
     className,
+    onClick,
 }) {
     return (
         <StyledButton
             className={className}
             type={buttonType}
             buttonBackgroundImage={buttonBackgroundImage}
+            onClick={onClick}
         >
             {isLoading ? (
                 <LoadSpinner

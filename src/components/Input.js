@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 const InputContainer = styled.div`
     display: flex;
+    width: 100%;
     ${(props) => {
         if (props.type === 'text' || props.type === 'password') {
             return `
@@ -31,6 +32,8 @@ const InputElement = styled.input`
             return `
                 padding: 5px;
                 font-size: 1.2rem;
+                border-radius: 3px;
+                border: 1px solid grey;
             `
         } else if (props.type === 'checkbox') {
             return `
@@ -43,7 +46,6 @@ const InputElement = styled.input`
             return `
                 color: red;
                 border: 1px solid red;
-                border-radius: 3px;
                 box-shadow: 0px 0px red;
                 z-index: 1;
             `
@@ -66,6 +68,7 @@ export default function Input({
     inputValue,
     isInvalid,
     isInvalidText,
+    inputPlaceholder,
 }) {
     return (
         <InputContainer type={inputType}>
@@ -78,9 +81,11 @@ export default function Input({
                 name={inputName}
                 onChange={inputEvents.onChange}
                 onClick={inputEvents.onClick}
+                defaultValue={inputValue}
                 defaultChecked={inputValue}
                 isInvalid={isInvalid}
                 autoComplete="on"
+                placeholder={inputPlaceholder}
             />
             {isInvalid && <InputInvalidText>{isInvalidText}</InputInvalidText>}
         </InputContainer>
@@ -103,6 +108,7 @@ Input.propTypes = {
     ]),
     isInvalid: PropTypes.bool,
     isInvalidText: PropTypes.string,
+    inputPlaceholder: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -112,4 +118,5 @@ Input.defaultProps = {
     },
     isInvalid: false,
     isInvalidText: 'Invalid value',
+    inputPlaceholder: '',
 }

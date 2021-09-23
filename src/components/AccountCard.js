@@ -10,12 +10,13 @@ const AccountCardContainer = styled.section`
     border: 1px solid black;
     background-color: white;
     width: 80%;
-    margin: 0 auto;
+    margin: 0 2rem;
     flex-direction: column;
     padding: 1.5rem;
     box-sizing: border-box;
     text-align: left;
     margin-bottom: 2rem;
+    border-radius: 3px;
     ${mediaQuery.min.tablet`
         flex-direction: row;
     `}
@@ -51,7 +52,7 @@ const AccountTitle = styled.h3`
 
 const AccountButtonTransaction = styled(Button)`
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 1rem;

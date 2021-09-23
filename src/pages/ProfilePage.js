@@ -1,27 +1,34 @@
 import { getUserProfile } from '../features/profile'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAuthentication, selectProfile } from '../utils/selectors'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import LoadSpinner from '../components/LoadSpinner'
 import styled from 'styled-components'
 import colors from '../utils/style/color'
 import Button from '../components/Button'
 import AccountCard from '../components/AccountCard'
+import EditProfileModal from '../components/EditProfileModal'
 
 const ProfilePageContent = styled.main`
     background-color: ${colors.backgroundDark};
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    ${(props) => {
+        if (props.loading) {
+            return `align-items: center;`
+        }
+    }}
 `
 const ProfilePageHeader = styled.div`
     color: white;
-    margin-bottom: 2rem;
+    margin: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
+    max-width: 1000px;
 `
 
 const EditButton = styled(Button)`
@@ -29,7 +36,7 @@ const EditButton = styled(Button)`
     background-color: ${colors.primaryLight};
     color: white;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 20px;
     margin-bottom: 2rem;
 `
 
@@ -67,8 +74,11 @@ export default function ProfilePage() {
         dispatch(getUserProfile(authentication.token))
     }, [dispatch, authentication.token])
 
+    const [displayEditProfileModal, setDisplayEditProfileModal] =
+        useState(false)
+
     return (
-        <ProfilePageContent>
+        <ProfilePageContent loading={profile.status === 'running'}>
             {profile.status === 'running' ? (
                 <LoadSpinner
                     colorOfBars={colors.primaryLight}
@@ -83,7 +93,10 @@ export default function ProfilePage() {
                         <br />
                         {`${profile.user.firstName} ${profile.user.lastName}!`}
                     </h1>
-                    <EditButton buttonText="Edit Name" />
+                    <EditButton
+                        buttonText="Edit Name"
+                        onClick={() => setDisplayEditProfileModal(true)}
+                    />
                     {accountData.map((elt, index) => (
                         <AccountCard
                             accountNumber={elt.number}
@@ -96,6 +109,13 @@ export default function ProfilePage() {
                     ))}
                 </ProfilePageHeader>
             )}
+            <EditProfileModal
+                title="Edit Profile"
+                onClose={() => {
+                    setDisplayEditProfileModal(false)
+                }}
+                displayModal={displayEditProfileModal}
+            ></EditProfileModal>
         </ProfilePageContent>
     )
 }

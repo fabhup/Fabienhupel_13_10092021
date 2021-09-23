@@ -56,7 +56,7 @@ export default function LoginForm() {
     }
 
     // function on submit form : redux state authentication is updated
-    // and route is redirected to ProfilePage if success
+    // and route is redirected to Page if success
     async function handleSubmit(e) {
         e.preventDefault()
         setSubmitted(true)

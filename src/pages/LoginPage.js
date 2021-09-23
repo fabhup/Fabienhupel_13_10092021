@@ -19,6 +19,7 @@ const LoginPageContainer = styled.section`
     margin: 0 auto;
     margin-bottom: 1rem;
     padding: 2rem;
+    border-radius: 3px;
 `
 
 const LoginPageTitle = styled.h1`
@@ -53,23 +54,25 @@ export default function LoginPage() {
     return (
         <LoginPageContent>
             <LoginPageContainer>
-                {//content displayed if there is an error with backend
-                authentication.error === 'Error: Backend is not active' ? (
-                    <LoginErrorContainer>
-                        <LoginErrorIcon icon={faFrown} />
-                        <LoginErrorMessage>
-                            Sorry, something went wrong !<br />
-                            You can refresh this page or retry later.
-                        </LoginErrorMessage>
-                    </LoginErrorContainer>
-                ) : (
-                    // Login Form content
-                    <>
-                        <LoginIcon icon={faUserCircle} />
-                        <LoginPageTitle>Sign In</LoginPageTitle>
-                        <LoginForm />
-                    </>
-                )}
+                {
+                    //content displayed if there is an error with backend
+                    authentication.error === 'Error: Backend is not active' ? (
+                        <LoginErrorContainer>
+                            <LoginErrorIcon icon={faFrown} />
+                            <LoginErrorMessage>
+                                Sorry, something went wrong !<br />
+                                You can refresh this page or retry later.
+                            </LoginErrorMessage>
+                        </LoginErrorContainer>
+                    ) : (
+                        // Login Form content
+                        <>
+                            <LoginIcon icon={faUserCircle} />
+                            <LoginPageTitle>Sign In</LoginPageTitle>
+                            <LoginForm />
+                        </>
+                    )
+                }
             </LoginPageContainer>
         </LoginPageContent>
     )
