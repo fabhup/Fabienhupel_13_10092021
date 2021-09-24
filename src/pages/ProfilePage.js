@@ -1,4 +1,4 @@
-import { getUserProfile } from '../features/profile'
+import { getUserProfile, updateUserProfile } from '../features/profile'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAuthentication, selectProfile } from '../utils/selectors'
 import { useEffect, useState } from 'react'
@@ -8,6 +8,7 @@ import colors from '../utils/style/color'
 import Button from '../components/Button'
 import AccountCard from '../components/AccountCard'
 import EditProfileModal from '../components/EditProfileModal'
+import { newUpdate } from '../features/profile'
 
 const ProfilePageContent = styled.main`
     background-color: ${colors.backgroundDark};
@@ -15,7 +16,7 @@ const ProfilePageContent = styled.main`
     justify-content: center;
     align-items: flex-start;
     ${(props) => {
-        if (props.loading) {
+        if (props.loading === 'true') {
             return `align-items: center;`
         }
     }}
@@ -71,14 +72,18 @@ export default function ProfilePage() {
     const profile = useSelector(selectProfile)
 
     useEffect(() => {
-        dispatch(getUserProfile(authentication.token))
+        if (profile.status !== 'success') {
+            dispatch(getUserProfile(authentication.token))
+        }
     }, [dispatch, authentication.token])
 
     const [displayEditProfileModal, setDisplayEditProfileModal] =
         useState(false)
 
     return (
-        <ProfilePageContent loading={profile.status === 'running'}>
+        <ProfilePageContent
+            loading={profile.status === 'running' ? 'true' : 'false'}
+        >
             {profile.status === 'running' ? (
                 <LoadSpinner
                     colorOfBars={colors.primaryLight}
@@ -95,7 +100,10 @@ export default function ProfilePage() {
                     </h1>
                     <EditButton
                         buttonText="Edit Name"
-                        onClick={() => setDisplayEditProfileModal(true)}
+                        onClick={() => {
+                            setDisplayEditProfileModal(true)
+                            dispatch(newUpdate())
+                        }}
                     />
                     {accountData.map((elt, index) => (
                         <AccountCard
@@ -103,7 +111,6 @@ export default function ProfilePage() {
                             accountTitle={elt.title}
                             accountAmount={elt.amount}
                             accountCurrency={elt.currency}
-                            accountDescription={elt.description}
                             key={index}
                         />
                     ))}

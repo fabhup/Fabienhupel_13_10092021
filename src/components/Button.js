@@ -15,6 +15,7 @@ export const StyledButton = styled.button`
     cursor: pointer;
     text-decoration: underline;
     border-radius: 3px;
+    position: relative;
     ${(props) => {
         if (props.buttonBackgroundImage) {
             return `
@@ -25,12 +26,34 @@ export const StyledButton = styled.button`
             `
         }
     }}
+    transition-duration: 0.4s;
+    overflow: hidden;
+    &:after {
+        content: '';
+        background: ${colors.primaryLight};
+        display: block;
+        position: absolute;
+        padding-top: 300%;
+        padding-left: 350%;
+
+        opacity: 0;
+        transition: all 0.6s;
+    }
+
+    &:active:after {
+        padding: 0;
+        margin: 0;
+        opacity: 0.5;
+        filter: brightness(120%);
+        transition: 0s;
+    }
 `
 
 export default function Button({
     buttonType,
     buttonText,
     buttonBackgroundImage,
+    buttonValue,
     isLoading,
     className,
     onClick,
@@ -41,6 +64,7 @@ export default function Button({
             type={buttonType}
             buttonBackgroundImage={buttonBackgroundImage}
             onClick={onClick}
+            value={buttonValue}
         >
             {isLoading ? (
                 <LoadSpinner

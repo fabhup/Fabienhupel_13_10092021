@@ -48,6 +48,9 @@ const InputElement = styled.input`
                 border: 1px solid red;
                 box-shadow: 0px 0px red;
                 z-index: 1;
+                &:focus{ 
+                    outline-color: red ;
+                }
             `
         }
     }}
@@ -65,10 +68,13 @@ export default function Input({
     inputName,
     inputLabel,
     inputEvents,
+    inputDefaultValue,
     inputValue,
     isInvalid,
     isInvalidText,
     inputPlaceholder,
+    isRequired,
+    disabled,
 }) {
     return (
         <InputContainer type={inputType}>
@@ -81,11 +87,14 @@ export default function Input({
                 name={inputName}
                 onChange={inputEvents.onChange}
                 onClick={inputEvents.onClick}
-                defaultValue={inputValue}
+                defaultValue={inputDefaultValue}
+                inputValue={inputValue}
                 defaultChecked={inputValue}
                 isInvalid={isInvalid}
                 autoComplete="on"
                 placeholder={inputPlaceholder}
+                required={isRequired}
+                disabled={disabled}
             />
             {isInvalid && <InputInvalidText>{isInvalidText}</InputInvalidText>}
         </InputContainer>

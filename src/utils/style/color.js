@@ -5,6 +5,7 @@ const colors = {
     primaryLight: '#00bc77',
     backgroundLight: '#ccc',
     backgroundDark: '#12002b',
+    redDark: '#D50000',
 }
 
 export default colors
