@@ -72,7 +72,10 @@ export default function ProfilePage() {
     const profile = useSelector(selectProfile)
 
     useEffect(() => {
-        if (profile.status !== 'success') {
+        if (
+            profile.status !== 'success' &&
+            !localStorage.getItem('user_profile')
+        ) {
             dispatch(getUserProfile(authentication.token))
         }
     }, [dispatch, authentication.token])

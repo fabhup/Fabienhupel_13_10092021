@@ -61,7 +61,7 @@ export default function LoginForm() {
         e.preventDefault()
         setSubmitted(true)
         if (username && password) {
-            dispatch(login(username, password))
+            dispatch(login(username, password, remember))
         }
         if (authentication.status === 'success') {
             history.push('/profile')

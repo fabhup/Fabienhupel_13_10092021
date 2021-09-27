@@ -8,6 +8,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAuthentication, selectProfile } from '../utils/selectors'
 import { logout } from '../features/authentication'
+import { logout as logoutProfile } from '../features/profile'
 
 const HomeLogo = styled.img`
     max-width: 100%;
@@ -55,6 +56,10 @@ function MainNav() {
     const profile = useSelector(selectProfile)
     const dispatch = useDispatch()
 
+    const logoutUser = () => {
+        dispatch(logout())
+        dispatch(logoutProfile())
+    }
     return (
         <NavContainer>
             <Link to="/" className="main-nav-logo">
@@ -68,7 +73,7 @@ function MainNav() {
                         : 'Sign In'}
                 </StyledLink>
                 {authentication.status === 'success' && (
-                    <StyledLink to="/" onClick={() => dispatch(logout())}>
+                    <StyledLink to="/" onClick={() => logoutUser()}>
                         <Icon icon={faSignOutAlt} size="lg" />
                         Sign Out
                     </StyledLink>

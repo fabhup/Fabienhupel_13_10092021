@@ -15,6 +15,7 @@ const ModalContainer = styled.div`
     transition: all 0.3s ease-in-out;
     opacity: 0;
     pointer-events: none;
+    z-index: 99;
     ${(props) => {
         if (props.displayModal) {
             return `

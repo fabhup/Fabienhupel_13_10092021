@@ -3,14 +3,15 @@ import { selectProfile } from '../utils/selectors'
 import { apiUrl } from '../utils/config/config'
 import axios from 'axios'
 
-const initialState = {
+let userProfileLoggedIn = JSON.parse(localStorage.getItem('user_profile'))
+
+const resetState = {
     status: 'void',
     error: null,
     user: {
         id: null,
         firstName: null,
         lastName: null,
-        email: null,
     },
     editedProfile: {
         firstName: null,
@@ -18,6 +19,23 @@ const initialState = {
         status: 'void',
     },
 }
+
+const initialState = userProfileLoggedIn
+    ? {
+          status: 'success',
+          error: null,
+          user: {
+              id: userProfileLoggedIn.id,
+              firstName: userProfileLoggedIn.firstName,
+              lastName: userProfileLoggedIn.lastName,
+          },
+          editedProfile: {
+              firstName: null,
+              lastName: null,
+              status: 'void',
+          },
+      }
+    : resetState
 
 export function getUserProfile(token) {
     return async (dispatch, getState) => {
@@ -37,9 +55,23 @@ export function getUserProfile(token) {
                 { headers: { Authorization: `Bearer ${token}` } },
                 { timeout: 5000 }
             )
-            const data = response.data
-            console.log(data.body)
-            dispatch(actions.success({ data: data.body }))
+            const data = {
+                id: response.data.body._id,
+                firstName: response.data.body.firstName,
+                lastName: response.data.body.lastName,
+            }
+            dispatch(actions.success({ data: data }))
+
+            // if the user has chosen remember option profile informations are stored in localstorage to prevent logout on refresh
+            if (localStorage.getItem('user_loggedIn')) {
+                localStorage.setItem(
+                    'user_profile',
+                    JSON.stringify({
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                    })
+                )
+            }
         } catch (error) {
             try {
                 const errorMessage = error.response.data.message
@@ -82,10 +114,20 @@ export function updateUserProfile(token, firstName, lastName) {
                 { timeout: 5000 }
             )
             const data = response.data
-            console.log(data.body)
             dispatch(
                 actions.updated({ firstName: firstName, lastName: lastName })
             )
+
+            // if the user has chosen remember option profile informations are stored in localstorage to prevent logout on refresh
+            if (localStorage.getItem('user_profile')) {
+                localStorage.setItem(
+                    'user_profile',
+                    JSON.stringify({
+                        firstName: firstName,
+                        lastName: lastName,
+                    })
+                )
+            }
         } catch (error) {
             try {
                 const errorMessage = error.response.data.message
@@ -180,8 +222,9 @@ const { actions, reducer } = createSlice({
             }
             return
         },
+        logout: () => resetState,
     },
 })
 
 export default reducer
-export const { newUpdate } = actions
+export const { newUpdate, logout } = actions

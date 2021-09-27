@@ -105,7 +105,7 @@ function EditProfileModal({ title, onClose, children, displayModal }) {
     async function saveAndUpdateProfile() {
         dispatch(
             updateUserProfile(
-                // authentication.token,
+                authentication.token,
                 newFirstName || profile.user.firstName,
                 newLastName || profile.user.lastName
             )

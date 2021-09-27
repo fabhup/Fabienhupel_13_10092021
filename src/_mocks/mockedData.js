@@ -1,5 +1,5 @@
 // Data used for mocking (for tests and development)
-export const users = [
+export let users = [
     {
         _id: 1,
         firstName: 'Tony',

@@ -21,25 +21,31 @@ export default function App() {
             <Header />
             <Switch>
                 <Route exact path="/">
-                    {authentication.status !== 'success' ? (
+                    {authentication.status !== 'success' &&
+                    !localStorage.getItem('user_loggedIn') ? (
                         <HomePage />
                     ) : (
                         <Redirect from="/" to="/profile" />
                     )}
                 </Route>
                 <Route exact path="/sign-in">
-                    {authentication.status !== 'success' ? (
+                    {authentication.status !== 'success' &&
+                    !localStorage.getItem('user_loggedIn') ? (
                         <LoginPage />
                     ) : (
                         <Redirect from="/sign-in" to="/profile" />
                     )}
                 </Route>
-                {authentication.status === 'success' && (
+                {(authentication.status === 'success' ||
+                    localStorage.getItem('user_loggedIn')) && (
                     <Route exact path="/profile">
                         <ProfilePage />
                     </Route>
                 )}
-                <Redirect from="*" to="/" />
+                <Redirect
+                    from="*"
+                    to={authentication.status === 'success' ? '/profile' : '/'}
+                />
             </Switch>
             <Footer />
         </Router>

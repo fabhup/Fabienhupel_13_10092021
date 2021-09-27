@@ -3,14 +3,25 @@ import { selectAuthentication } from '../utils/selectors'
 import { apiUrl } from '../utils/config/config'
 import axios from 'axios'
 
-const initialState = {
+let userLoggedIn = JSON.parse(localStorage.getItem('user_loggedIn'))
+
+const resetState = {
     status: 'void',
     error: null,
     username: null,
     token: null,
 }
 
-export function login(username, password) {
+const initialState = userLoggedIn
+    ? {
+          status: 'success',
+          error: null,
+          username: userLoggedIn.username,
+          token: userLoggedIn.token,
+      }
+    : resetState
+
+export function login(username, password, remember) {
     return async (dispatch, getState) => {
         const status = selectAuthentication(getState()).status
         if (status === 'running') {
@@ -32,6 +43,17 @@ export function login(username, password) {
             )
             const data = response.data
             dispatch(actions.loginSuccess({ username: username, data: data }))
+
+            // if the user has checked remember option on loginForm, informations are stored in localstorage to prevent logout on refresh
+            if (remember) {
+                localStorage.setItem(
+                    'user_loggedIn',
+                    JSON.stringify({
+                        username: username,
+                        token: data.body.token,
+                    })
+                )
+            }
         } catch (error) {
             try {
                 const errorMessage = error.response.data.message
@@ -50,6 +72,14 @@ export function login(username, password) {
                 )
             }
         }
+    }
+}
+
+export function logout() {
+    return async (dispatch, getState) => {
+        dispatch(actions.logout())
+        localStorage.removeItem('user_loggedIn')
+        localStorage.removeItem('user_profile')
     }
 }
 
@@ -89,10 +119,10 @@ const { actions, reducer } = createSlice({
             }
             return
         },
-        logout: () => initialState,
+        logout: () => resetState,
     },
 })
 
-export const { loginRunning, loginFailed, loginSuccess, logout } = actions
+export const { loginRunning, loginFailed, loginSuccess } = actions
 
 export default reducer

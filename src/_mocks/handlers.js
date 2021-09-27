@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 export const handlers = [
     rest.post(apiUrl + '/user/login', loginUser),
     rest.post(apiUrl + '/user/profile', getUserWithToken),
+    rest.put(apiUrl + '/user/profile', updateUserWithToken),
 ]
 
 function loginUser(req, res, ctx) {
@@ -46,6 +47,34 @@ function getUserWithToken(req, res, ctx) {
     return getUserProfile(req, res, ctx)
 }
 
+function updateUserWithToken(req, res, ctx) {
+    validateToken(req, res, ctx)
+    return updateUserProfile(req, res, ctx)
+}
+
+function validateToken(req, res, ctx) {
+    const ctxDelay = 500
+    let ctxStatus = null
+    let ctxJSON = null
+    try {
+        const userToken = req.headers._headers.authorization
+            .split('Bearer')[1]
+            .trim()
+        const decodedToken = jwt.verify(
+            userToken,
+            process.env.REACT_APP_SECRET_KEY || 'default-secret-key'
+        )
+        console.log('token verified')
+        return next()
+    } catch (error) {
+        if (!req.headers._headers.authorization) {
+            ctxStatus = 400
+            ctxJSON = { message: 'Token is missing from header' }
+        }
+    }
+    return res(ctx.delay(ctxDelay), ctx.status(ctxStatus), ctx.json(ctxJSON))
+}
+
 function getUserProfile(req, res, ctx) {
     const ctxDelay = 500
     let ctxStatus = null
@@ -71,25 +100,27 @@ function getUserProfile(req, res, ctx) {
     return res(ctx.delay(ctxDelay), ctx.status(ctxStatus), ctx.json(ctxJSON))
 }
 
-function validateToken(req, res, ctx) {
+function updateUserProfile(req, res, ctx) {
     const ctxDelay = 500
     let ctxStatus = null
     let ctxJSON = null
-    try {
-        const userToken = req.headers._headers.authorization
-            .split('Bearer')[1]
-            .trim()
-        const decodedToken = jwt.verify(
-            userToken,
-            process.env.REACT_APP_SECRET_KEY || 'default-secret-key'
-        )
-        console.log('token verified')
-        return next()
-    } catch (error) {
-        if (!req.headers._headers.authorization) {
-            ctxStatus = 400
-            ctxJSON = { message: 'Token is missing from header' }
-        }
+
+    const jwtToken = req.headers._headers.authorization
+        .split('Bearer')[1]
+        .trim()
+    const decodedJwtToken = jwt.decode(jwtToken)
+    const user = users.find((user) => {
+        return user._id === decodedJwtToken.id
+    })
+
+    if (!user) {
+        ctxStatus = 400
+        ctxJSON = { message: 'User not found' }
+    } else {
+        ctxStatus = 200
+        ctxJSON = user
+        ctxJSON = { body: user }
+        console.log(ctxJSON)
     }
     return res(ctx.delay(ctxDelay), ctx.status(ctxStatus), ctx.json(ctxJSON))
 }
