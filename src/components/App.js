@@ -12,11 +12,12 @@ import LoginPage from '../pages/LoginPage'
 import ProfilePage from '../pages/ProfilePage'
 import Header from './Header'
 import Footer from './Footer'
+import { routerBaseName } from '../utils/config/config'
 
 export default function App() {
     const authentication = useSelector(selectAuthentication)
     return (
-        <Router>
+        <Router basename={routerBaseName}>
             <GlobalStyle />
             <Header />
             <Switch>
