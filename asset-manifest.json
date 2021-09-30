@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/Fabienhupel_13_10092021/static/js/main.4ce5cbbc.chunk.js",
-    "main.js.map": "/Fabienhupel_13_10092021/static/js/main.4ce5cbbc.chunk.js.map",
+    "main.js": "/Fabienhupel_13_10092021/static/js/main.b504594a.chunk.js",
+    "main.js.map": "/Fabienhupel_13_10092021/static/js/main.b504594a.chunk.js.map",
     "runtime-main.js": "/Fabienhupel_13_10092021/static/js/runtime-main.1d6b954d.js",
     "runtime-main.js.map": "/Fabienhupel_13_10092021/static/js/runtime-main.1d6b954d.js.map",
     "static/js/2.5a71303d.chunk.js": "/Fabienhupel_13_10092021/static/js/2.5a71303d.chunk.js",
@@ -20,6 +20,6 @@
   "entrypoints": [
     "static/js/runtime-main.1d6b954d.js",
     "static/js/2.5a71303d.chunk.js",
-    "static/js/main.4ce5cbbc.chunk.js"
+    "static/js/main.b504594a.chunk.js"
   ]
 }
