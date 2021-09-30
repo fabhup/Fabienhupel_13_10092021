@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.js": "/Fabienhupel_13_10092021/static/js/main.b504594a.chunk.js",
-    "main.js.map": "/Fabienhupel_13_10092021/static/js/main.b504594a.chunk.js.map",
-    "runtime-main.js": "/Fabienhupel_13_10092021/static/js/runtime-main.1d6b954d.js",
-    "runtime-main.js.map": "/Fabienhupel_13_10092021/static/js/runtime-main.1d6b954d.js.map",
-    "static/js/2.5a71303d.chunk.js": "/Fabienhupel_13_10092021/static/js/2.5a71303d.chunk.js",
-    "static/js/2.5a71303d.chunk.js.map": "/Fabienhupel_13_10092021/static/js/2.5a71303d.chunk.js.map",
-    "static/js/3.0f81e279.chunk.js": "/Fabienhupel_13_10092021/static/js/3.0f81e279.chunk.js",
-    "static/js/3.0f81e279.chunk.js.map": "/Fabienhupel_13_10092021/static/js/3.0f81e279.chunk.js.map",
-    "index.html": "/Fabienhupel_13_10092021/index.html",
-    "static/js/2.5a71303d.chunk.js.LICENSE.txt": "/Fabienhupel_13_10092021/static/js/2.5a71303d.chunk.js.LICENSE.txt",
-    "static/media/Avenir-Heavy.f728da1a.ttf": "/Fabienhupel_13_10092021/static/media/Avenir-Heavy.f728da1a.ttf",
-    "static/media/argentBankLogo.e031a16c.png": "/Fabienhupel_13_10092021/static/media/argentBankLogo.e031a16c.png",
-    "static/media/bank-tree.4d59987c.jpeg": "/Fabienhupel_13_10092021/static/media/bank-tree.4d59987c.jpeg",
-    "static/media/icon-chat.e238539d.png": "/Fabienhupel_13_10092021/static/media/icon-chat.e238539d.png",
-    "static/media/icon-money.8ec88bb1.png": "/Fabienhupel_13_10092021/static/media/icon-money.8ec88bb1.png",
-    "static/media/icon-security.1c819fa1.png": "/Fabienhupel_13_10092021/static/media/icon-security.1c819fa1.png"
+    "main.js": "./static/js/main.c90ba9a8.chunk.js",
+    "main.js.map": "./static/js/main.c90ba9a8.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.3e4102e9.js",
+    "runtime-main.js.map": "./static/js/runtime-main.3e4102e9.js.map",
+    "static/js/2.93d658f5.chunk.js": "./static/js/2.93d658f5.chunk.js",
+    "static/js/2.93d658f5.chunk.js.map": "./static/js/2.93d658f5.chunk.js.map",
+    "static/js/3.0f81e279.chunk.js": "./static/js/3.0f81e279.chunk.js",
+    "static/js/3.0f81e279.chunk.js.map": "./static/js/3.0f81e279.chunk.js.map",
+    "index.html": "./index.html",
+    "static/js/2.93d658f5.chunk.js.LICENSE.txt": "./static/js/2.93d658f5.chunk.js.LICENSE.txt",
+    "static/media/Avenir-Heavy.f728da1a.ttf": "./static/media/Avenir-Heavy.f728da1a.ttf",
+    "static/media/argentBankLogo.e031a16c.png": "./static/media/argentBankLogo.e031a16c.png",
+    "static/media/bank-tree.4d59987c.jpeg": "./static/media/bank-tree.4d59987c.jpeg",
+    "static/media/icon-chat.e238539d.png": "./static/media/icon-chat.e238539d.png",
+    "static/media/icon-money.8ec88bb1.png": "./static/media/icon-money.8ec88bb1.png",
+    "static/media/icon-security.1c819fa1.png": "./static/media/icon-security.1c819fa1.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.1d6b954d.js",
-    "static/js/2.5a71303d.chunk.js",
-    "static/js/main.b504594a.chunk.js"
+    "static/js/runtime-main.3e4102e9.js",
+    "static/js/2.93d658f5.chunk.js",
+    "static/js/main.c90ba9a8.chunk.js"
   ]
 }
