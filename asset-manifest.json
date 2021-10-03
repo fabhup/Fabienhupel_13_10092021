@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "./static/js/main.58685008.chunk.js",
-    "main.js.map": "./static/js/main.58685008.chunk.js.map",
+    "main.js": "./static/js/main.86a3fc71.chunk.js",
+    "main.js.map": "./static/js/main.86a3fc71.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.3e4102e9.js",
     "runtime-main.js.map": "./static/js/runtime-main.3e4102e9.js.map",
-    "static/js/2.93d658f5.chunk.js": "./static/js/2.93d658f5.chunk.js",
-    "static/js/2.93d658f5.chunk.js.map": "./static/js/2.93d658f5.chunk.js.map",
+    "static/js/2.450861b9.chunk.js": "./static/js/2.450861b9.chunk.js",
+    "static/js/2.450861b9.chunk.js.map": "./static/js/2.450861b9.chunk.js.map",
     "static/js/3.0f81e279.chunk.js": "./static/js/3.0f81e279.chunk.js",
     "static/js/3.0f81e279.chunk.js.map": "./static/js/3.0f81e279.chunk.js.map",
     "index.html": "./index.html",
-    "static/js/2.93d658f5.chunk.js.LICENSE.txt": "./static/js/2.93d658f5.chunk.js.LICENSE.txt",
+    "static/js/2.450861b9.chunk.js.LICENSE.txt": "./static/js/2.450861b9.chunk.js.LICENSE.txt",
     "static/media/Avenir-Heavy.f728da1a.ttf": "./static/media/Avenir-Heavy.f728da1a.ttf",
     "static/media/argentBankLogo.e031a16c.png": "./static/media/argentBankLogo.e031a16c.png",
     "static/media/bank-tree.4d59987c.jpeg": "./static/media/bank-tree.4d59987c.jpeg",
@@ -19,7 +19,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.3e4102e9.js",
-    "static/js/2.93d658f5.chunk.js",
-    "static/js/main.58685008.chunk.js"
+    "static/js/2.450861b9.chunk.js",
+    "static/js/main.86a3fc71.chunk.js"
   ]
 }
