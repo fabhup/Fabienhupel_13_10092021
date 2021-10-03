@@ -1,8 +1,18 @@
 import { createGlobalStyle } from 'styled-components'
 import AvenirHeavy from "../fonts/Avenir-Heavy/Avenir-Heavy.ttf";
 import colors from './color'
+import { keyframes } from 'styled-components'
 
 // GlobalStyle component to manage the style used for all the App
+
+const RootLoading = keyframes`
+    0% { opacity: 0;
+         transform: scaleY(0.8);}
+    100% {
+        opacity: 1;
+        transform: scaleY(1)
+    }
+`
 
 const StyledGlobalStyle = createGlobalStyle`
     @font-face {
@@ -75,6 +85,11 @@ const StyledGlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        justify-content:center;
+        visibiity: visible;
+        animation: ${RootLoading} 400ms ease-in-out;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
     }
 `
 
